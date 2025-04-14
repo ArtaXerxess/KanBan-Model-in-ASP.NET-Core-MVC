@@ -1,0 +1,126 @@
+﻿@* KanBan_Model/Areas/ToDo/Views/ToDo/Index.cshtml *@
+@{
+    ViewData["Title"] = $"Modify {Model.Title}";
+    Layout = "../Shared/_Layout";
+}
+
+@model KanBan_Model.Models.KanBanCard;
+
+<div class="container my-5">
+
+    <div class="p-5 bg-body-tertiary rounded-3 ">
+        <h1 class="text-body-emphasis">ToDo : Modify KanBan Card</h1>
+        <form asp-action="Index" method="post" asp-controller="ToDo" asp-area="ToDo">
+
+            <div class="form-floating mb-3 my-2">
+                <input type="text" class="form-control" id="CardTitle" asp-for="Title">
+                <label for="CardTitle">Title</label>
+            </div>
+
+            <div class="form-floating my-2">
+                <input type="text" class="form-control" id="CardDescription" asp-for="Description">
+                <label for="CardDescription">Description</label>
+            </div>
+
+            <div class="form-floating my-2">
+                <input type="text" class="form-control" id="CardAssignee" asp-for="Assignee">
+                <label for="CardAssignee">Assignee Name</label>
+            </div>
+
+            <div class="form-floating my-2">
+                <input type="date" class="form-control" id="CardDueDate" asp-for="DueDate">
+                <label for="CardDueDate">Due Date</label>
+            </div>
+
+            @* Phase radio buttons *@
+
+            <div class="container phase_radio_buttons my-2">
+
+                <h3>Phase</h3>
+
+                <div class="form-check">
+                    <input asp-for="Phase" class="form-check-input" type="radio"
+                        value="@KanBan_Model.Models.KanBanTaskPhase.To_Do" id="ToDo" />
+                    <label class="form-check-label" for="ToDo">To Do</label>
+                </div>
+
+                <div class="form-check">
+                    <input asp-for="Phase" class="form-check-input" type="radio"
+                        value="@KanBan_Model.Models.KanBanTaskPhase.In_Progress" id="InProgress" />
+                    <label class="form-check-label" for="InProgress">In Progress</label>
+                </div>
+
+                <div class="form-check">
+                    <input asp-for="Phase" class="form-check-input" type="radio"
+                        value="@KanBan_Model.Models.KanBanTaskPhase.Testing" id="Testing" />
+                    <label class="form-check-label" for="Testing">Testing</label>
+                </div>
+
+                <div class="form-check">
+                    <input asp-for="Phase" class="form-check-input" type="radio"
+                        value="@KanBan_Model.Models.KanBanTaskPhase.Done" id="Done" />
+                    <label class="form-check-label" for="Done">Done</label>
+                </div>
+            </div>
+
+            @* priority radio buttons *@
+
+            <div class="container priority_radio_buttons my-2">
+
+                <h3>Priority</h3>
+
+                <div class="form-check">
+                    <input asp-for="Priority" class="form-check-input" type="radio"
+                        value="@KanBan_Model.Models.KanBanTaskPriority.Critical" id="Critical" />
+                    <label class="form-check-label" for="Critical">Critical</label>
+                </div>
+
+                <div class="form-check">
+                    <input asp-for="Priority" class="form-check-input" type="radio"
+                        value="@KanBan_Model.Models.KanBanTaskPriority.High" id="High" />
+                    <label class="form-check-label" for="High">High</label>
+                </div>
+
+                <div class="form-check">
+                    <input asp-for="Priority" class="form-check-input" type="radio"
+                        value="@KanBan_Model.Models.KanBanTaskPriority.Medium" id="Medium" />
+                    <label class="form-check-label" for="Medium">Medium</label>
+                </div>
+
+                <div class="form-check">
+                    <input asp-for="Priority" class="form-check-input" type="radio"
+                        value="@KanBan_Model.Models.KanBanTaskPriority.Low" id="Low" />
+                    <label class="form-check-label" for="Low">Low</label>
+                </div>
+
+            </div>
+
+
+
+
+            @* attachments link and docs(textarea) *@
+
+            <div class="form-floating mb-3 my-2">
+                <input type="text" class="form-control" id="Links" asp-for="Attachment!.Links">
+                <label for="Links">Links</label>
+            </div>
+
+            <div class="container document_textarea my-2">
+
+                <label for="Documents">Notes</label>
+                <textarea asp-for="Attachment!.Document" class="form-control"
+                    placeholder="Write your Notes or Documents here..." id="Documents" style="height: 100px">
+                </textarea>
+
+            </div>
+
+            <div class="container m-5">
+                <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+
+
+
+        </form>
+
+    </div>
+</div>

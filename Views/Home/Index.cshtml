@@ -1,0 +1,119 @@
+﻿@{
+    // KanBan_Model/Views/Home/Index.cshtml
+    ViewData["Title"] = "Home Page";
+}
+
+@model KanBanCardViewModel;
+
+<div class="text-center">
+
+    <form asp-action="NewTask" asp-controller="Home" >
+        <button class="btn btn-primary" type="submit">
+            Create New Task 💡
+        </button>
+    </form>
+    
+    <div id="kanban_cards_table" class="kanban_cards_table table-responsive " data-bs-spy="scroll">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">To Do</th>
+                    <th scope="col">In Progress</th>
+                    <th scope="col">Testing</th>
+                    <th scope="col">Done</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @* Todo *@
+                <td>
+                    @foreach (var card in Model.Cards!.Where(card => card.Phase == KanBanTaskPhase.To_Do))
+                    {
+                        <form method="post" asp-action="CardAction" asp-controller="Home">
+                            <input type="hidden" name="Id" value="@card.Id" />
+                            <div class="card border-primary mb-3 my-2">
+                                <h5 class="card-header">@card.Title</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">@card.Description</h5>
+                                    <p class="card-text">Assignee: @card.Assignee</p>
+                                    <p class="card-text">DueDate: @card.DueDate.ToString("dd/MM/yyyy")</p>
+                                    <button name="action" type="submit" value="move" class="btn btn-primary">Move
+                                        👉</button>
+                                    <button name="action" type="submit" value="modify" class="btn btn-primary">Modify
+                                        ✏️</button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </td>
+
+                @* In Progress *@
+                <td>
+                    @foreach (var card in Model.Cards!.Where(card => card.Phase == KanBanTaskPhase.In_Progress))
+                    {
+                        <form asp-action="CardAction" asp-controller="Home" method="post">
+                            <input type="hidden" name="Id" value="@card.Id" />
+                            <div class="card border-primary mb-3 my-2">
+                                <h5 class="card-header">@card.Title</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">@card.Description</h5>
+                                    <p class="card-text">Assignee: @card.Assignee</p>
+                                    <p class="card-text">DueDate : @card.DueDate.ToString("dd/mm/yyyy")</p>
+                                    <button name="action" type="submit" value="move" class="btn btn-primary">Move
+                                        👉</button>
+                                    <button name="action" type="submit" value="modify" class="btn btn-primary">
+                                        Modify ✏️
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </td>
+
+                @* Testing *@
+                <td>
+                    @foreach (var card in Model.Cards!.Where(card => card.Phase == KanBanTaskPhase.Testing))
+                    {
+                        <form method="post" asp-action="CardAction" asp-controller="Home">
+                            <input type="hidden" name="Id" value="@card.Id" />
+                            <div class="card border-primary mb-3 my-2">
+                                <h5 class="card-header">@card.Title</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">@card.Description</h5>
+                                    <p class="card-text">Assignee: @card.Assignee</p>
+                                    <p class="card-text">DueDate : @card.DueDate.ToString("dd/mm/yyyy")</p>
+                                    <button name="action" type="submit" value="move" class="btn btn-primary">Move
+                                        👉</button>
+                                    <button name="action" type="submit" value="modify" class="btn btn-primary">Modify
+                                        ✏️</button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </td>
+
+                @* Done *@
+                <td>
+                    @foreach (var card in Model.Cards!.Where(card => card.Phase == KanBanTaskPhase.Done))
+                    {
+                        <form method="post" asp-controller="Home" asp-action="CardAction">
+                            <input type="hidden" name="Id" value="@card.Id" />
+                            <div class="card border-primary mb-3 my-2">
+                                <h5 class="card-header">@card.Title</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">@card.Description</h5>
+                                    <p class="card-text">Assignee: @card.Assignee</p>
+                                    <p class="card-text">DueDate : @card.DueDate.ToString("dd/mm/yyyy")</p>
+                                    <button name="action" type="submit" value="close" class="btn btn-primary">Close
+                                        📕</button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </td>
+            </tbody>
+        </table>
+    </div>
+
+</div>
