@@ -42,3 +42,12 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+/wwwroot
+/wwwroot
+wwwroot/
+/wwwroot/
+/wwwroot/lib/
+/wwwroot/lib/bootstrap
+*.css
+/wwwroot/lib/bootstrap/dist
+/wwwroot/lib/bootstrap
