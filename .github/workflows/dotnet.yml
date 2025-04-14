@@ -16,8 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name : running dotnet clean
-      run : dotnet clean
     - name : Testing Setup
       run : echo "Hello Reader, ArtaXerxes is the most feared developer on the planet....🔥"
     # - name: Setup .NET
